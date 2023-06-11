@@ -40,14 +40,17 @@ class UserLoginView(TokenObtainPairView):
         response = super().post(request, *args, **kwargs)
 
         # Odczytanie tokena dostępu z odpowiedzi
-        access_token = response.data['access']
+        access_token = response.data.get('access')
 
-        # Ustawienie tokena dostępu w sesji
-        session = SessionStore(request.session.session_key)
-        session['access_token'] = access_token
-        session.save()
+        if access_token:
+            # Ustawienie tokena dostępu w sesji
+            session = SessionStore(request.session.session_key)
+            session['access_token'] = access_token
+            session.save()
 
         return response
+
+
 
 
 class BoardListView(APIView):

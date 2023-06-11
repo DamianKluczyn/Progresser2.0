@@ -38,8 +38,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=150)
-    password = serializers.CharField(max_length=128, write_only=True)
+    username = serializers.CharField(max_length=150, required=True, allow_blank=False)
+    password = serializers.CharField(max_length=128, write_only=True, required=True, allow_blank=False)
     access_token = serializers.SerializerMethodField()
     refresh_token = serializers.SerializerMethodField()
 
