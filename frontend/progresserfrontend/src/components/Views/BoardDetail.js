@@ -8,23 +8,27 @@ const BoardDetail = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/lists/?board=${boardId}`, {
-        headers: { Authorization: `JWT ${localStorage.getItem("access")}` },
-      })
-      .then((response) => setLists(response.data))
-      .catch((error) => {
-        console.error("There was an error retrieving the lists!", error);
-      });
+    const fetchListsAndTasks = async () => {
+      try {
+        const listsResponse = await axios.get(`http://localhost:8000/api/lists/?board=${boardId}`, {
+          headers: { Authorization: `JWT ${localStorage.getItem("access")}` },
+        });
+        setLists(listsResponse.data);
 
-    axios
-      .get(`http://localhost:8000/api/tasks/?list=${boardId}`, {
-        headers: { Authorization: `JWT ${localStorage.getItem("access")}` },
-      })
-      .then((response) => setTasks(response.data))
-      .catch((error) => {
-        console.error("There was an error retrieving the tasks!", error);
-      });
+        const tasksArray = [];
+        for (let list of listsResponse.data) {
+          const tasksResponse = await axios.get(`http://localhost:8000/api/tasks/?list=${list.id}`, {
+            headers: { Authorization: `JWT ${localStorage.getItem("access")}` },
+          });
+          tasksArray.push(...tasksResponse.data);
+        }
+        setTasks(tasksArray);
+      } catch (error) {
+        console.error("There was an error retrieving the data!", error);
+      }
+    }
+
+    fetchListsAndTasks();
   }, [boardId]);
 
   return (
