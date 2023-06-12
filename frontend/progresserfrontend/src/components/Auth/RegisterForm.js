@@ -37,42 +37,52 @@ const RegisterForm = () => {
   };
 
   return (
-    <div>
-      <h2>Formularz rejestracji</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Nazwa użytkownika:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleInputChange}
-          />
+    <div className="main-page">
+        <div className="content">
+            <div className="register-container">
+              <form onSubmit={handleSubmit}>
+
+                <div>
+                  <label htmlFor="email" className="register_text">Adres email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={handleInputChange}
+                    className="register"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="username" className="register_text">Nazwa użytkownika:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={handleInputChange}
+                    className="register"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="register_text">Hasło:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={handleInputChange}
+                    className="register"
+                  />
+                </div>
+
+                <button type="submit" className="RegisterBtn">Zarejestruj się</button>
+              </form>
+              {message && <p>{message}</p>}
+            </div>
         </div>
-        <div>
-          <label htmlFor="email">Adres email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Hasło:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit">Zarejestruj się</button>
-      </form>
-      {message && <p>{message}</p>}
     </div>
   );
 };

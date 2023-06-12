@@ -19,12 +19,27 @@ const Boards = () => {
 
 
   return (
-    <div className="boards-container">
-      {boards.map((board) => (
-        <div key={board.id} className="board">
-          <h3><Link to={`/boards/${board.id}`}>{board.title}</Link></h3>
-        </div>
-      ))}
+    <div className="main-page">
+      <div className="content">
+          {boards.map((board) => (
+              <div className="board">
+                <Link to={`/boards/${board.id}`} style={{ textDecoration: 'none' }}>
+                <div className="red-section">
+                  <div className="board-title">
+                    {board.title}
+                  </div>
+                </div>
+                </Link>
+              </div>
+          ))}
+          <div className="board">
+              <div className="red-section">
+                  <Link to={`/boards/`} style={{ textDecoration: 'none' }}>
+                      <button className="add_board" type="submit"></button>
+                  </Link>
+              </div>
+          </div>
+      </div>
     </div>
   );
 };

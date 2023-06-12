@@ -1,11 +1,41 @@
 import React, { useState, useEffect } from "react";
 import axios from '../../axiosConfig';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import '../index.css'; // ensure this css file is in the same directory
 
 const BoardDetail = () => {
   const { boardId } = useParams();
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
+
+  const convertNumberToString = (num) => {
+    switch(num) {
+      case 1:
+        return 'one';
+      case 2:
+        return 'two';
+      case 3:
+        return 'three';
+      case 4:
+        return 'four';
+      default:
+        return '';
+    }
+  }
+
+  const convertPriorityToString = (num) => {
+    switch(num) {
+      case 1:
+        return 'low';
+      case 2:
+        return 'mid';
+      case 3:
+        return 'ASAP';
+      default:
+        return '';
+    }
+  }
 
   useEffect(() => {
     const fetchListsAndTasks = async () => {
@@ -32,16 +62,27 @@ const BoardDetail = () => {
   }, [boardId]);
 
   return (
-    <div>
-      <h2>Lists</h2>
-      {lists.map((list) => (
-        <div key={list.id}>
-          <h3>{list.name}</h3>
-          {tasks.filter(task => task.list === list.id).map((task) => (
-            <div key={task.id}>{task.name}</div>
-          ))}
-        </div>
-      ))}
+    <div className="main-page">
+      <div className="content">
+        {lists.map((list) => (
+          <div className="list" key={list.id}>
+            <div className="list-title">{list.name}</div>
+            {tasks.filter(task => task.list === list.id).map((task) => (
+              <div className="task" key={task.id}>
+                <div className={`task-title priority-${convertPriorityToString(task.priority)}`}>{task.name}</div>
+                <div className="difficulty-container-tasks">
+                  {[...Array(4)].map((_, index) =>
+                    <div key={index} className={`difficulty-bar difficulty-${convertNumberToString(index+1)} ${task.difficulty >= (index + 1) ? convertNumberToString(task.difficulty) : ''}`}></div>
+                  )}
+                </div>
+              </div>
+            ))}
+            <Link to={`/AddTask?id_list=${list.id}`} style={{ textDecoration: 'none' }}>
+              <div className="add_task">ADD</div>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

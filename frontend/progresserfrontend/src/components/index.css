@@ -1,0 +1,410 @@
+.App {
+    margin: 0;
+    font-family: 'Inter';
+    background-size: 100%;
+    background: linear-gradient(
+            116.82deg,
+            #483c60 0%,
+            rgba(69, 69, 92, 0.95) 0%,
+            #29457a 100%
+    );
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+.content {
+    width: calc(100% - 60px);
+    padding: 5% 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.login-container,
+.register-container,
+.add{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    width: max(20vw, 300px);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #d9d9d9;
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+/* Board */
+
+.red-section {
+    padding-top: 5%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(138, 26, 26);
+    border-radius: 15px;
+}
+
+.board {
+    width: max(250px, 30%);
+    height: 300px;
+    margin-bottom: 40px;
+}
+
+.board-title {
+    font-style: normal;
+    font-size: larger;
+    text-align: center;
+    color: white;
+}
+
+.board:hover {
+    cursor: pointer;
+}
+
+button.add_board {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: rgb(138, 26, 26);
+    cursor: pointer;
+    width: 100%;
+    height: 95%;
+    margin-bottom: 40px;
+    border-radius: 15px;
+}
+
+button.add_board:focus {
+    outline: 0;
+}
+
+button.FileBtn,
+button.AddBtn,
+button.LoginBtn,
+button.RegisterBtn{
+    background: #6d253e;
+    border: 3px solid #6d253e !important;
+    border-radius: 20px;
+    width: 50%;
+    line-height: 2.5em;
+    color: white;
+    margin: 1em;
+    font-size: 20px;
+}
+button:hover {
+    cursor: pointer;
+    color: #6d253e;
+    background-color: #d9d9d9;
+}
+
+.add_board {
+    background-color: rgb(138, 26, 26);
+    border-radius: 15px;
+}
+
+.add_board::before {
+    content: "+";
+    font-size:max(100px, 15vw);
+    font-weight:bold;
+    color:white;
+}
+.add_board_form {
+    width: 100%;
+    height: 70%;
+}
+
+.board_settings{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    width: max(30vw, 400px);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #d9d9d9;
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+input {
+    background-color: transparent;
+    font-size: 20px;
+    border: 3px solid #6d253e;
+    padding: 10px;
+    margin: 12px;
+    width: 80%;
+    line-height: 2.5em;
+    border-radius: 20px;
+    outline: none;
+}
+
+/* Task and List */
+
+.list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: max(150px, 12%);
+}
+
+.list-title{
+    color: white;
+    font-size: 20px !important;
+    text-align: center;
+    margin-bottom: max(10px, 2%);
+}
+
+.task{
+    background: rgba(217, 217, 217, 0.6);
+    border-radius: 15px;
+    width: 100%;
+    margin-bottom: max(10px, 2%);
+}
+
+.task-title{
+    font-size: 20px;
+    font-style: normal;
+    font-weight:bold;
+    text-align: center;
+    color: black;
+    padding: 3px;
+}
+
+.add_task {
+    background: rgba(217, 217, 217, 0.2);
+    width: 100%;
+    border-radius: 30px;
+    font-style: normal;
+    color: white;
+    text-align: center;
+    padding: 6px 0;
+}
+
+.add_task_text,
+.login_text,
+.register_text{
+    font-weight: bold;
+    color: black;
+    font-size: 20px !important;
+    text-align: center;
+    margin-bottom: max(10px, 2%);
+}
+
+/* Difficulty and Priority */
+
+.difficulty-container,
+.priority-container {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-bottom: max(10px, 2%);
+}
+
+.difficulty-container-tasks{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: max(10px, 2%);
+    margin-top: max(10px, 2%);
+}
+
+.difficulty-bar{
+    width: 35px;
+    height: 20px;
+    border: 3px solid black;
+    box-sizing: border-box;
+    display: block;
+    background: white;
+    cursor: pointer;
+}
+
+.difficulty-one{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+}
+
+.difficulty-two{
+}
+
+.difficulty-three{
+}
+
+.difficulty-four{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.difficulty-one.one,
+.difficulty-one.two,
+.difficulty-two.two,
+.difficulty-one.three,
+.difficulty-two.three,
+.difficulty-three.three,
+.difficulty-one.four,
+.difficulty-two.four,
+.difficulty-three.four,
+.difficulty-four.four{
+    background: black;
+}
+.difficulty-two.one,
+.difficulty-three.one,
+.difficulty-four.one,
+.difficulty-three.two,
+.difficulty-four.two,
+.difficulty-four.three
+{
+    background: white;
+}
+
+.priority{
+    font-size: 18px !important;
+    cursor: pointer;
+}
+
+.priority-low{
+    border-bottom: 3px solid green;
+}
+
+.priority-mid{
+    border-bottom: 3px solid cornflowerblue;
+}
+
+.priority-ASAP{
+    border-bottom: 3px solid darkred;
+}
+
+.content-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: max(20vw, 300px);
+}
+
+.priority-item,
+.difficulty-bar {
+    cursor: pointer;
+}
+
+.priority-item.selected {
+    background: #ccc;
+}
+.difficulty-bar.filled {
+    background-color: black;
+}
+
+/* Mobile devices */
+@media screen and (max-width: 480px) {
+    .login-container,
+    .register-container,
+    .add,
+    .board_settings {
+        width: 90vw;
+    }
+
+    input {
+        width: 90%;
+        margin: 8px;
+        padding: 8px;
+    }
+
+    button.FileBtn,
+    button.AddBtn,
+    button.LoginBtn,
+    button.RegisterBtn {
+        width: 80%;
+        font-size: 16px;
+    }
+}
+
+/* Tablet devices */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .login-container,
+    .register-container,
+    .add,
+    .board_settings {
+        width: 80vw;
+    }
+
+    input {
+        width: 85%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    button.FileBtn,
+    button.AddBtn,
+    button.LoginBtn,
+    button.RegisterBtn {
+        width: 70%;
+        font-size: 18px;
+    }
+}
+
+/* Small desktop and larger tablets */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .login-container,
+    .register-container,
+    .add,
+    .board_settings {
+        width: 70vw;
+    }
+
+    input {
+        width: 80%;
+        margin: 12px;
+        padding: 12px;
+    }
+
+    button.FileBtn,
+    button.AddBtn,
+    button.LoginBtn,
+    button.RegisterBtn {
+        width: 60%;
+        font-size: 20px;
+    }
+}
+
+/* Larger desktop */
+@media screen and (min-width: 1025px) {
+    .login-container,
+    .register-container,
+    .add,
+    .board_settings {
+        width: max(30vw, 400px);
+    }
+
+    input {
+        width: 80%;
+        margin: 12px;
+        padding: 10px;
+    }
+
+    button.FileBtn,
+    button.AddBtn,
+    button.LoginBtn,
+    button.RegisterBtn {
+        width: 50%;
+        font-size: 20px;
+    }
+}

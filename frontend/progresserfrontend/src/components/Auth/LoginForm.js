@@ -42,35 +42,40 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form-container">
-      <h2>Formularz logowania</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Nazwa użytkownika:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleInputChange}
-          />
+    <div className="main-page">
+        <div className="content">
+            <div className="login-container">
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="username" className="login_text">Nazwa użytkownika:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={handleInputChange}
+                    className="login"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="login_text">Hasło:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={handleInputChange}
+                    className="login"
+                  />
+                </div>
+                <button type="submit" className="LoginBtn">Zaloguj się</button>
+              </form>
+              {message && <p>{message}</p>}
+              <button className="RegisterBtn" onClick={handleRegister}>
+                Zarejestruj się
+              </button>
+            </div>
         </div>
-        <div>
-          <label htmlFor="password">Hasło:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit">Zaloguj się</button>
-      </form>
-      {message && <p>{message}</p>}
-      <button className="register-button" onClick={handleRegister}>
-        Zarejestruj się
-      </button>
     </div>
   );
 };

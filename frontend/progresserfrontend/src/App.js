@@ -4,16 +4,17 @@ import RegisterForm from './components/Auth/RegisterForm';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Boards from "./components/Views/Boards";
 import BoardDetail from "./components/Views/BoardDetail";
+import AddTask from "./components/Views/AddTask";
 
 function App() {
   return (
     <div className="App">
-      <h1>Progresser App</h1>
       <Router>
         <Routes>
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/boards" element={<Boards />} />
           <Route path="/boards/:boardId" element={<BoardDetail />} />
+          <Route path="/addTask" element={<AddTask />} />
           <Route path="/" element={<LoginForm />} />
         </Routes>
       </Router>
