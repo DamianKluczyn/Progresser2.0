@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from '../../axiosConfig';
+import { Link } from 'react-router-dom';
 //import "./Boards.css";
 
 const Boards = () => {
@@ -7,8 +8,8 @@ const Boards = () => {
 
   useEffect(() => {
     axios
-      .get("/api/boards/", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
+      .get("http://localhost:8000/api/boards/", {
+        headers: { Authorization: `JWT ${localStorage.getItem("access")}` },
       })
       .then((response) => setBoards(response.data))
       .catch((error) => {
@@ -21,7 +22,7 @@ const Boards = () => {
     <div className="boards-container">
       {boards.map((board) => (
         <div key={board.id} className="board">
-          <h3>{board.title}</h3>
+          <h3><Link to={`/boards/${board.id}`}>{board.title}</Link></h3>
         </div>
       ))}
     </div>

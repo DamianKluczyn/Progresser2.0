@@ -4,6 +4,8 @@ from .models import Board, List, Task
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, style={'input_type': 'password'})
+
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')

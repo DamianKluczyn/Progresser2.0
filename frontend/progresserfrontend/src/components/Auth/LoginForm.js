@@ -25,13 +25,13 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/auth/token/login/', { username, password })
+      .post('http://localhost:8000/auth/jwt/create/', { username, password })
       .then((response) => {
         setMessage('Zalogowano pomyślnie');
         const token = response.data.access;
         localStorage.setItem('access', token);
         localStorage.setItem('refresh', response.data.refresh);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axios.defaults.headers.common['Authorization'] = `JWT ${token}`;
         navigate('/boards');
       })
       .catch((error) => {

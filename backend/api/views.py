@@ -1,12 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.models import User
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .models import Board, List, Task
 from .serializers import (
-    UserSerializer,
     BoardSerializer,
     ListSerializer,
     TaskSerializer
@@ -17,8 +14,7 @@ class BoardListView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # Zwraca tablice tylko dla zalogowanego użytkownika
-        boards = Board.objects.filter(users__in=[request.user])
+        boards = Board.objects.filter(users__id=request.user.id)
         serializer = BoardSerializer(boards, many=True)
         return Response(serializer.data)
 
@@ -38,6 +34,14 @@ class BoardDetailView(APIView):
 
 
 class ListCreateView(APIView):
+    def get(self, request):
+        board_id = request.query_params.get('board', None)
+        if board_id is not None:
+            lists = List.objects.filter(board_id=board_id)
+            serializer = ListSerializer(lists, many=True)
+            return Response(serializer.data)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
     def post(self, request):
         serializer = ListSerializer(data=request.data)
         if serializer.is_valid():
@@ -54,6 +58,14 @@ class ListDetailView(APIView):
 
 
 class TaskCreateView(APIView):
+    def get(self, request):
+        list_id = request.query_params.get('list', None)
+        if list_id is not None:
+            tasks = Task.objects.filter(list_id=list_id)
+            serializer = TaskSerializer(tasks, many=True)
+            return Response(serializer.data)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
     def post(self, request):
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
