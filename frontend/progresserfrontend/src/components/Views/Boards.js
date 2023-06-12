@@ -34,7 +34,7 @@ const Boards = () => {
           ))}
           <div className="board">
               <div className="red-section">
-                  <Link to={`/boards/`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/AddBoard/`} style={{ textDecoration: 'none' }}>
                       <button className="add_board" type="submit"></button>
                   </Link>
               </div>
