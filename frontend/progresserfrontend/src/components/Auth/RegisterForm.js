@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,10 +23,12 @@ const RegisterForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('/api/register/', { username, email, password })
+      .post('http://localhost:8000/auth/users/', { username, password, email })
       .then((response) => {
-        setMessage('Zarejestrowano pomyślnie');
-        // Dodaj tutaj odpowiednie działania po rejestracji, np. przekierowanie do strony logowania
+        setMessage('Rejestracja pomyślna');
+        localStorage.setItem('access', response.data.access);
+        localStorage.setItem('refresh', response.data.refresh);
+        navigate('/');
       })
       .catch((error) => {
         setMessage('Wystąpił błąd podczas rejestracji');

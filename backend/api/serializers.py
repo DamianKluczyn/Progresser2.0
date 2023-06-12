@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Board, List, Task
 
 
@@ -35,44 +34,3 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'priority', 'difficulty', 'name', 'list')
-
-
-class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=150, required=True, allow_blank=False)
-    password = serializers.CharField(max_length=128, write_only=True, required=True, allow_blank=False)
-    access_token = serializers.SerializerMethodField()
-    refresh_token = serializers.SerializerMethodField()
-
-    def get_access_token(self, obj):
-        refresh = RefreshToken.for_user(obj)
-        return str(refresh.access_token)
-
-    def get_refresh_token(self, obj):
-        refresh = RefreshToken.for_user(obj)
-        return str(refresh)
-
-
-class UserRegisterSerializer(serializers.ModelSerializer):
-    access_token = serializers.SerializerMethodField()
-    refresh_token = serializers.SerializerMethodField()
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password', 'access_token', 'refresh_token')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
-
-    def get_access_token(self, obj):
-        refresh = RefreshToken.for_user(obj)
-        return str(refresh.access_token)
-
-    def get_refresh_token(self, obj):
-        refresh = RefreshToken.for_user(obj)
-        return str(refresh)
