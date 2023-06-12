@@ -15,7 +15,7 @@ const AddBoard = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/api/boards/', { name: boardName }, {
+      .post('http://localhost:8000/api/boards/create/', { title: boardName }, {
         headers: { Authorization: `JWT ${localStorage.getItem("access")}` }
       })
       .then((response) => {
